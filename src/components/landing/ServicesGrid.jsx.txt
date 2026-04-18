@@ -1,0 +1,193 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Package, Building2, ShieldCheck } from "lucide-react";
+
+const SERVICES = [
+  {
+    id: "lastmile",
+    code: "SVC-01",
+    title: "Last-Mile Delivery",
+    subtitle: "Fast & Secure",
+    description:
+      "Fast, secure last-mile delivery for packages, equipment, and time-sensitive items with professional handling.",
+    specs: [
+      { label: "Coverage", value: "West Michigan" },
+      { label: "Speed", value: "Same-Day Available" },
+      { label: "Handling", value: "Professional" },
+    ],
+    image: "https://media.base44.com/images/public/69de46d644e778bcad0aa46c/ac8852f2c_generated_image.png",
+    icon: Package,
+    ideal: ["Retail stores", "E-commerce sellers", "Medical offices", "Individuals"],
+  },
+  {
+    id: "b2b",
+    code: "SVC-02",
+    title: "B2B Routes & Logistics",
+    subtitle: "Scheduled & Reliable",
+    description:
+      "Scheduled routes, recurring deliveries, and custom logistics solutions designed around your business workflow.",
+    specs: [
+      { label: "Frequency", value: "Daily/Weekly/Monthly" },
+      { label: "Type", value: "Contracted Routes" },
+      { label: "Reliability", value: "99.9% On-Time" },
+    ],
+    image: "https://media.base44.com/images/public/69de46d644e778bcad0aa46c/588abc710_generated_ed78e5d4.png",
+    icon: Building2,
+    ideal: ["B2B transport", "Supply chain", "Document delivery", "Equipment movement"],
+  },
+  {
+    id: "specialty",
+    code: "SVC-03",
+    title: "Specialty Transport",
+    subtitle: "Certified & Compliant",
+    description:
+      "Secure handling for medical, confidential, fragile, and high-value cargo with full certification compliance.",
+    specs: [
+      { label: "Clearance", value: "TWIC / TSA" },
+      { label: "Compliance", value: "HIPAA" },
+      { label: "Cargo", value: "High-Value" },
+    ],
+    image: "https://media.base44.com/images/public/69de46d644e778bcad0aa46c/908faa5fe_generated_8e1c7dc1.png",
+    icon: ShieldCheck,
+    ideal: ["Medical deliveries", "Confidential docs", "Biohazard cargo", "High-value equipment"],
+  },
+];
+
+function ServiceCard({ service, index }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      className="flex-shrink-0 w-[320px] sm:w-[360px] group relative"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="relative h-[520px] border border-border overflow-hidden bg-card transition-all duration-500 hover:border-primary/40">
+        {/* Image */}
+        <div className="h-[280px] overflow-hidden relative">
+          <img
+            src={service.image}
+            alt={`${service.title} - detail of transport equipment`}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+          
+          {/* Service Code */}
+          <span className="absolute top-4 left-4 text-[0.6rem] font-mono tracking-[0.3em] text-primary bg-background/80 backdrop-blur-sm px-3 py-1.5 border border-border">
+            {service.code}
+          </span>
+        </div>
+
+        {/* Content */}
+        <div className="p-6 space-y-4">
+          <div className="flex items-center gap-3">
+            <service.icon className="w-5 h-5 text-primary" />
+            <span className="text-[0.65rem] font-mono tracking-[0.2em] text-muted-foreground uppercase">
+              {service.subtitle}
+            </span>
+          </div>
+          <h3 className="text-xl font-bold">{service.title}</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {service.description}
+          </p>
+        </div>
+
+        {/* Hover Specs Overlay */}
+        <motion.div
+          className="absolute inset-0 bg-card/98 backdrop-blur-sm p-6 flex flex-col justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.3 }}
+          style={{ pointerEvents: hovered ? "auto" : "none" }}
+        >
+          <span className="text-[0.6rem] font-mono tracking-[0.3em] text-primary uppercase mb-3">
+            Performance Specs
+          </span>
+          <h3 className="text-2xl font-bold mb-6">{service.title}</h3>
+
+          <div className="space-y-4 mb-6">
+            {service.specs.map((spec, i) => (
+              <div
+                key={i}
+                className="flex justify-between items-center py-2 border-b border-border"
+              >
+                <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                  {spec.label}
+                </span>
+                <span className="text-sm font-semibold text-primary">
+                  {spec.value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mb-6">
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider block mb-3">
+              Ideal For
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {service.ideal.map((item, i) => (
+                <span
+                  key={i}
+                  className="text-[0.65rem] font-mono px-2.5 py-1 border border-border text-muted-foreground"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <a
+            href="#quote"
+            className="flex items-center gap-2 text-sm font-semibold text-primary hover:underline mt-auto"
+          >
+            Request This Service
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function ServicesGrid() {
+  return (
+    <section id="services" className="py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-px bg-primary" />
+              <span className="text-xs font-mono tracking-[0.3em] text-primary uppercase">
+                Our Services
+              </span>
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-bold leading-tight">
+              Professional
+              <br />
+              Transport Solutions
+            </h2>
+          </div>
+          <p className="text-muted-foreground max-w-md text-base leading-relaxed">
+            Reliable, insured, and efficient transport and delivery solutions
+            tailored to West Michigan businesses and individuals.
+          </p>
+        </div>
+      </div>
+
+      {/* Horizontal Scroll Cards */}
+      <div className="overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-6 px-6 lg:px-8 max-w-7xl mx-auto">
+          {SERVICES.map((service, i) => (
+            <ServiceCard key={service.id} service={service} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

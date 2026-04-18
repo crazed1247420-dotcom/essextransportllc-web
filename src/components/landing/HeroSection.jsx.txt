@@ -1,0 +1,157 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Shield, Clock, Truck } from "lucide-react";
+import { motion } from "framer-motion";
+
+export default function HeroSection() {
+  return (
+    <section id="home" className="relative min-h-screen flex items-center">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://media.base44.com/images/public/69de46d644e778bcad0aa46c/64f810ea5_generated_480b9133.png"
+          alt="Essex Transport semi-truck navigating a highway interchange at dusk"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 pb-20 lg:pt-40 lg:pb-32">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+          {/* Left Content - 3 cols */}
+          <motion.div
+            className="lg:col-span-3 space-y-8"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Technical Label */}
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-px bg-primary" />
+              <span className="text-xs font-mono tracking-[0.3em] text-primary uppercase">
+                EST. West Michigan
+              </span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[0.95] tracking-tight">
+              Precision
+              <br />
+              <span className="text-primary">Transport</span>
+              <br />
+              & Delivery
+            </h1>
+
+            <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
+              Professional, insured, and on-time logistics for businesses and
+              individuals. Built on reliability, communication, and doing the job
+              right the first time.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <a href="#quote">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base px-8 h-14 gap-3 min-w-[180px]">
+                  Get a Quote
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </a>
+              <a href="tel:+16162891570">
+                <Button
+                  variant="outline"
+                  className="border-border text-foreground hover:bg-secondary font-semibold text-base px-8 h-14 min-w-[160px]"
+                >
+                  Call Now
+                </Button>
+              </a>
+            </div>
+
+            {/* Stats Row */}
+            <div className="flex flex-wrap gap-8 pt-4">
+              {[
+                { icon: Shield, label: "Fully Insured", value: "& Certified" },
+                { icon: Clock, label: "Same-Day", value: "Available" },
+                { icon: Truck, label: "Local", value: "West Michigan" },
+              ].map((stat, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded border border-border flex items-center justify-center">
+                    <stat.icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-muted-foreground tracking-wider uppercase">
+                      {stat.label}
+                    </p>
+                    <p className="text-sm font-semibold text-foreground">
+                      {stat.value}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right - Quick Quote Card - 2 cols */}
+          <motion.div
+            className="lg:col-span-2"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            <div className="bg-card/80 backdrop-blur-sm border border-border p-8 space-y-6">
+              <div className="flex flex-col items-start gap-3">
+                <img
+                  src="https://media.base44.com/images/public/69de46d644e778bcad0aa46c/3958a04e3_EssexLogo-splitshieldtr.png"
+                  alt="Essex Transport LLC shield logo"
+                  className="h-20 w-auto object-contain"
+                />
+                <div>
+                  <span className="text-[0.65rem] font-mono tracking-[0.3em] text-primary uppercase">
+                    Tactical Quote
+                  </span>
+                  <h2 className="text-2xl font-bold mt-1">
+                    Request a Free Quote
+                  </h2>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Tell us your transport needs. We respond within 1 hour.
+                  </p>
+                </div>
+              </div>
+
+              <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth' }); }}>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="w-full h-12 bg-secondary border border-border px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  className="w-full h-12 bg-secondary border border-border px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary transition-colors"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  className="w-full h-12 bg-secondary border border-border px-4 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary transition-colors"
+                />
+                <textarea
+                  rows={3}
+                  placeholder="Brief description of your transport needs..."
+                  className="w-full bg-secondary border border-border px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary transition-colors resize-none"
+                />
+                <Button
+                  type="submit"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold h-12"
+                >
+                  Submit Request
+                </Button>
+              </form>
+
+              <p className="text-[0.65rem] font-mono text-muted-foreground text-center tracking-wider">
+                RESPONSE TIME: {"<"} 1 HOUR · FREE ESTIMATES
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
