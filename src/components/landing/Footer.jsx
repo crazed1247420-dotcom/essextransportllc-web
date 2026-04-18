@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Shield, FileCheck, Award, AlertTriangle } from "lucide-react";
 
@@ -55,4 +56,58 @@ export default function Footer() {
           </div>
 
           {/* Link Columns */}
- 
+          {Object.entries(LINKS).map(([title, links]) => (
+            <div key={title}>
+              <h4 className="text-xs font-mono tracking-[0.3em] text-primary uppercase mb-6">
+                {title}
+              </h4>
+              <ul className="space-y-3">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          {/* Certifications */}
+          <div>
+            <h4 className="text-xs font-mono tracking-[0.3em] text-primary uppercase mb-6">
+              Industry Standards
+            </h4>
+            <div className="grid grid-cols-2 gap-3">
+              {CERT_ICONS.map((cert, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 p-3 border border-border"
+                >
+                  <cert.icon className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-[0.65rem] font-mono text-muted-foreground">
+                    {cert.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-16 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs font-mono text-muted-foreground tracking-wider">
+            © {new Date().getFullYear()} ESSEX TRANSPORT LLC. ALL RIGHTS
+            RESERVED.
+          </p>
+          <p className="text-xs font-mono text-muted-foreground tracking-wider">
+            LOCAL · PROFESSIONAL · INSURED
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
