@@ -1,0 +1,30 @@
+import React from "react";
+import Navbar from "../components/landing/Navbar";
+import TickerTape from "../components/landing/TickerTape";
+import HeroSection from "../components/landing/HeroSection";
+import ServicesGrid from "../components/landing/ServicesGrid";
+import AboutSection from "../components/landing/AboutSection";
+import ServiceDetails from "../components/landing/ServiceDetails";
+import ServiceAreas from "../components/landing/ServiceAreas";
+import Testimonials from "../components/landing/Testimonials";
+import QuoteForm from "../components/landing/QuoteForm";
+import ContactSection from "../components/landing/ContactSection";
+import Footer from "../components/landing/Footer";
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <Navbar />
+      <TickerTape />
+      <HeroSection />
+      <ServicesGrid />
+      <AboutSection />
+      <ServiceDetails />
+      <ServiceAreas />
+      <Testimonials />
+      <QuoteForm />
+      <ContactSection />
+      <Footer />
+    </div>
+  );
+}
